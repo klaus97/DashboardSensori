@@ -40,9 +40,11 @@ public class DashboardController implements Initializable {
 
     public void LoadDataSensor() throws SQLException {
 
-            SensoreController sensoreController = new SensoreController();
-            listdati=sensoreController.LoadData();
+            DatoDaoInterface datoDaoInterface = new DatoDao();
+            listdati=datoDaoInterface.LoadData();
             setTable(listdati);
+
+            SensoreController.listsensor=listdati;
         }
 
 
@@ -83,7 +85,7 @@ public class DashboardController implements Initializable {
                             i++;
                         } else {
                             setText(String.valueOf(valore));
-                            
+
                             if (valore > listdati.get(i).getMassimale()) {
                                 setStyle("-fx-background-color:red");
                             } else {
