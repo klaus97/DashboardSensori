@@ -6,15 +6,16 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DashboardController">
+<AnchorPane prefHeight="591.0" prefWidth="726.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DashboardController">
 <children>
-    <TableView fx:id="tablesearch" layoutX="7.0" layoutY="94.0" prefHeight="497.0" prefWidth="573.0">
+    <TableView fx:id="tablesearch" layoutX="7.0" layoutY="94.0" prefHeight="497.0" prefWidth="710.0">
         <columns>
             <TableColumn fx:id="col_codice" prefWidth="132.0" text="codice" />
-            <TableColumn fx:id="col_valore" minWidth="0.0" prefWidth="72.0" text="valore" />
-            <TableColumn fx:id="col_tipo" prefWidth="189.0" text="tipo" />
-            <TableColumn fx:id="col_datainvio" prefWidth="79.0" text="datainvio" />
-            <TableColumn fx:id="col_max" prefWidth="100.0" text="massimale" />
+            <TableColumn fx:id="col_stato" minWidth="0.0" prefWidth="42.0" text="stato" />
+            <TableColumn fx:id="col_valore" prefWidth="103.0" text="valore" />
+            <TableColumn fx:id="col_tipo" prefWidth="219.0" text="tipo" />
+            <TableColumn fx:id="col_datainvio" prefWidth="129.0" text="datainvio" />
+            <TableColumn fx:id="col_max" prefWidth="84.0" text="massimale" />
         </columns>
     </TableView>
 </children>

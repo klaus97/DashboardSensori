@@ -3,22 +3,19 @@ package controller;
 import dao.DatoDao;
 import dao.DatoDaoInterface;
 import model.Sensore;
-
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
-
 
 public class SensoreController {
 
     static ArrayList<Sensore> listsensor = new ArrayList<>();
     DatoDaoInterface datoDaoInterface = new DatoDao();
     ArrayList<Sensore> listdati = new ArrayList<>();
+
 
     public ArrayList<Sensore> GenerateVariable()
     {
@@ -42,7 +39,7 @@ public class SensoreController {
 
             Date dnow= new Date();
             SimpleDateFormat ft =
-                    new SimpleDateFormat ("E yyyy.MM.dd 'at' hh:mm:ss a zzz");
+                    new SimpleDateFormat ("yyyy.MM.dd hh:mm:ss");
             String data=ft.format(dnow);
             try {
                 dnow=ft.parse(data);
@@ -82,9 +79,7 @@ public class SensoreController {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
-
 
 }
 
