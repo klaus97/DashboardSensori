@@ -1,7 +1,7 @@
 package controller;
 
 import dao.DatoDao;
-import dao.DatoDaoInterface;
+import dao.Interface.DatoDaoInterface;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -52,8 +52,8 @@ public class DashboardController implements Initializable {
         col_valore.setCellValueFactory(new PropertyValueFactory<>("valore"));
         col_tipo.setCellValueFactory(new PropertyValueFactory<>("tipo"));
         col_datainvio.setCellValueFactory(new PropertyValueFactory<>("datainvio"));
-        col_max.setCellValueFactory(new PropertyValueFactory<>("massimale"));
         col_stato.setCellValueFactory(new PropertyValueFactory<>("stato"));
+        col_max.setCellValueFactory(new PropertyValueFactory<>("link"));
 
         oblist=FXCollections.observableArrayList(); //dichiaro l'oblist nel metodo initialize della classe
 
@@ -71,41 +71,46 @@ public class DashboardController implements Initializable {
             oblist.add(listdati.get(i));
             tablesearch.setItems(oblist);
         }
-        col_valore.setCellFactory(col ->{
-            return new TableCell<Sensore,Integer> (){
-                protected void updateItem(Integer valore,boolean empty)
-                {
-                    Iterator<Sensore> itr = listdati.iterator();
 
-                    super.updateItem(valore,empty);
-                    while(itr.hasNext()) {
-                        int test = itr.next().getMassimale();
-                        if (valore == null || empty) {
-                            setText(null);
-                            setStyle("");
+            col_valore.setCellFactory(col -> {
+                return new TableCell<Sensore, Integer>() {
+                    protected void updateItem(Integer valore, boolean empty) {
 
-                        } else {
-                            setText(String.valueOf(valore));
-                            System.out.println("test" + valore);
-                            if (valore > test) {
-                                setStyle("-fx-background-color:orange");
-                                System.out.println(test);
-                            } else {
-                                setStyle("");
+                        if(valore!= null) {
+
+                            Iterator<Sensore> itr = listdati.iterator();
+                            
+                            super.updateItem(valore, empty);
+                            while (itr.hasNext()) {
+                                Sensore temp = itr.next();
+
+                                if (valore == null || empty) {
+                                    setText(null);
+                                    setStyle("");
+
+                                } else {
+                                    setText(String.valueOf(valore));
+
+                                    if (valore.equals(temp.getValore())) {
+                                        System.out.print("VALORE:" + valore + " " + "TEST:" + temp.getMassimale());
+                                        if (valore > temp.getMassimale()) {
+                                            setStyle("-fx-background-color:orange");
+                                        } else {
+                                            setStyle("");
+                                        }
+                                    }
+
+                                }
                             }
-
                         }
                     }
-                }
-            };
-        });
+                };
+            });
 
-
-        col_stato.setCellFactory(col ->{
-            return new TableCell<Sensore,Boolean> (){
-                protected void updateItem(Boolean stato,boolean empty)
-                {
-                    super.updateItem(stato,empty);
+            col_stato.setCellFactory(col -> {
+                return new TableCell<Sensore, Boolean>() {
+                    protected void updateItem(Boolean stato, boolean empty) {
+                        super.updateItem(stato, empty);
                         if (stato == null || empty) {
                             setText(null);
                             setStyle("");
@@ -118,7 +123,8 @@ public class DashboardController implements Initializable {
 
                         }
                     }
-            };
-        });
+                };
+            });
+
     }
 }

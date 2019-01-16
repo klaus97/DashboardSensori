@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="439.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ZonaController">
+    <children>
+    <TableView fx:id="tablezona" layoutX="19.0" layoutY="61.0" prefHeight="325.0" prefWidth="399.0">
+        <columns>
+            <TableColumn fx:id="col_nomezona" prefWidth="186.0" text="Nome" />
+            <TableColumn fx:id="col_provincia" prefWidth="161.0" text="Provincia" />
+            <TableColumn fx:id="col_view" prefWidth="50.0" text="View" />
+        </columns>
+    </TableView>
+      <Label layoutX="19.0" layoutY="20.0" prefHeight="27.0" prefWidth="131.0" text="Selezione Zona">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <effect>
+            <Glow level="0.8">
+               <input>
+                  <InnerShadow blurType="GAUSSIAN" choke="1.0" color="#940404" height="169.01" radius="62.51" width="83.03" />
+               </input>
+            </Glow>
+         </effect>
+      </Label>
+      <Button fx:id="btback" layoutX="348.0" layoutY="21.0" mnemonicParsing="false" onAction="#Backarea" prefHeight="25.0" prefWidth="70.0" text="Back" />
+    </children>
+</AnchorPane>

@@ -1,5 +1,8 @@
 package model;
 
+import controller.JavaFXController;
+import javafx.scene.control.Hyperlink;
+import javafx.scene.input.MouseEvent;
 import java.util.Date;
 
 public class Sensore extends Dato {
@@ -7,13 +10,23 @@ public class Sensore extends Dato {
     public String codices;
     public Boolean stato;
     public Integer massimale;
+    public Hyperlink link;
+    public Integer frequenza;
 
-    public Sensore(String cod,Boolean state, Integer max,Integer v,String t,Date d)
+    public Sensore(String cod,Boolean state, Integer max,Integer freq,Integer v,String t,Date d)
     {
         super(v,t,d);
         this.codices=cod;
         this.stato=state;
         this.massimale=max;
+        this.frequenza=freq;
+        this.link=new Hyperlink(this.getMassimale().toString());
+
+        //se viene cliccato apre la finestra per la gestione del massimale
+        link.setOnMouseClicked((MouseEvent mouseEvent) ->
+        {
+            JavaFXController.setGestionemax(new Sensore(this.getCodices(),null,this.getMassimale(),0,null,null,null));
+        });
     }
 
     public String getCodices() {
@@ -38,5 +51,20 @@ public class Sensore extends Dato {
 
     public void setMassimale(Integer massimale) {
         this.massimale = massimale;
+    }
+
+    public Integer getFrequenza() {
+        return frequenza;
+    }
+
+    public void setFrequenza(Integer frequenza) {
+        this.frequenza = frequenza;
+    }
+
+    public Hyperlink getLink() {
+        return link;
+    }
+    public void setLink(Hyperlink link) {
+        this.link = link;
     }
 }

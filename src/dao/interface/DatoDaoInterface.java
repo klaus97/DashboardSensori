@@ -1,4 +1,4 @@
-package dao;
+package dao.Interface;
 
 import model.Dato;
 import model.Sensore;
@@ -11,4 +11,5 @@ public interface DatoDaoInterface {
 
      ArrayList<Sensore> LoadData() throws SQLException;
      void SendData(ArrayList<Sensore> dati) throws SQLException;
+     void SendDataFreq(ArrayList<Sensore> dati) throws SQLException;
 }

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.effect.Glow?>
+
+<AnchorPane prefHeight="421.0" prefWidth="659.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LuogoController">
+
+    <children>
+        <TableView fx:id="tableluogo" layoutX="26.0" layoutY="61.0" prefHeight="325.0" prefWidth="607.0">
+            <columns>
+                <TableColumn fx:id="col_nomeluogo" prefWidth="165.0" text="Nome" />
+                <TableColumn fx:id="col_indirizzo" prefWidth="248.0" text="Indirizzo" />
+                <TableColumn fx:id="col_stanza" prefWidth="89.0" text="Stanza" />
+            <TableColumn fx:id="col_piano" prefWidth="48.0" text="Piano" />
+            <TableColumn fx:id="col_view" prefWidth="56.0" text="View" />
+            </columns>
+        </TableView>
+        <Label layoutX="26.0" layoutY="20.0" prefHeight="27.0" prefWidth="131.0" text="Selezione Luogo">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <effect>
+            <DropShadow height="4.5" radius="1.75" spread="0.58" width="4.5">
+               <input>
+                  <Glow level="0.0" />
+               </input>
+            </DropShadow>
+         </effect></Label>
+      <Button fx:id="btback" layoutX="575.0" layoutY="21.0" mnemonicParsing="false" onAction="#Backzona" prefHeight="25.0" prefWidth="58.0" text="Back" />
+    </children>
+
+</AnchorPane>

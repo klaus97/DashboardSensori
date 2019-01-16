@@ -2,17 +2,27 @@ package model;
 
 public class Gestore {
 
+    public Integer id;
     public String codice;
     public String nome;
     public String cognome;
     public String ruolo;
 
-    public Gestore(String cod,String name,String cogn,String tipo)
+    public Gestore(Integer i,String cod,String name,String cogn,String tipo)
     {
+        this.id=i;
         this.codice=cod;
         this.nome=name;
         this.cognome=cogn;
-        this.codice=tipo;
+        this.ruolo=tipo;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getCodice() {
