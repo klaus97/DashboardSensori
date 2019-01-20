@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="481.0" prefWidth="842.0" style="-fx-background-color: #00ffff;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.GestioneSensori">
+   <children>
+      <Button layoutX="16.0" layoutY="35.0" mnemonicParsing="false" onAction="#Back" prefHeight="25.0" prefWidth="51.0" text="Back" />
+      <Label layoutX="14.0" layoutY="83.0" prefHeight="25.0" prefWidth="152.0" text="Crea Nuovo Sensore:">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtcode" layoutX="16.0" layoutY="127.0" prefHeight="25.0" prefWidth="282.0" promptText="codice" />
+      <TextField fx:id="txtmax" layoutX="16.0" layoutY="177.0" prefHeight="25.0" prefWidth="282.0" promptText="massimale" />
+      <Label layoutX="16.0" layoutY="227.0" prefHeight="20.0" prefWidth="40.0" text="Dove:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <ChoiceBox fx:id="cbluogo" layoutX="69.0" layoutY="225.0" onAction="#ChangeText" prefHeight="25.0" prefWidth="113.0" />
+      <Label fx:id="lbluogo" layoutX="15.0" layoutY="275.0" prefHeight="17.0" prefWidth="51.0" text="Luogo:" visible="false">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <ChoiceBox fx:id="cbluogoC" layoutX="69.0" layoutY="271.0" onAction="#ChangeTextLuogo" prefHeight="25.0" prefWidth="113.0" visible="false" />
+      <Label fx:id="lbstanza" layoutX="16.0" layoutY="321.0" text="Stanza:" visible="false">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <ChoiceBox fx:id="cbstanza" layoutX="69.0" layoutY="318.0" prefHeight="25.0" prefWidth="113.0" visible="false" />
+      <Button fx:id="btsave" layoutX="126.0" layoutY="374.0" mnemonicParsing="false" onAction="#CreateSensore" prefHeight="25.0" prefWidth="113.0" text="Salva" />
+      <Button fx:id="btdelete" layoutX="778.0" layoutY="35.0" mnemonicParsing="false" onAction="#Delete" text="Delete" />
+      <TextField fx:id="txtsearch" layoutX="378.0" layoutY="83.0" prefHeight="25.0" prefWidth="386.0" promptText="search for codice..." />
+      <Button fx:id="btsearch" layoutX="777.0" layoutY="83.0" mnemonicParsing="false" onAction="#Search" prefHeight="25.0" prefWidth="51.0" text="Cerca" />
+      <TableView fx:id="tablesensore" layoutX="378.0" layoutY="128.0" prefHeight="337.0" prefWidth="235.0">
+        <columns>
+          <TableColumn fx:id="col_cod" prefWidth="110.0" text="Codice" />
+          <TableColumn fx:id="col_stato" prefWidth="40.0" text="Stato" />
+            <TableColumn fx:id="col_max" prefWidth="83.0" text="Massimale" />
+        </columns>
+      </TableView>
+      <TableView fx:id="tableluogo" layoutX="613.0" layoutY="128.0" prefHeight="337.0" prefWidth="215.0">
+        <columns>
+          <TableColumn fx:id="col_luogo" text="Luogo" />
+          <TableColumn fx:id="col_ind" prefWidth="134.0" text="Indirizzo" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

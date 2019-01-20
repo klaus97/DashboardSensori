@@ -2,8 +2,11 @@ package controller;
 
 import dao.DatoDao;
 import dao.Interface.DatoDaoInterface;
+import dao.Interface.LuogoDaoInterface;
+import dao.LuogoDao;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableCell;
@@ -21,28 +24,49 @@ import java.util.ResourceBundle;
 public class DashboardController implements Initializable {
 
     @FXML
-    private TableView<Sensore> tablesearch;
+    private TableView<Sensore> tabledata;
     @FXML
-    private  TableColumn<Sensore,Integer> col_valore,col_max;
+    private TableView<Luogo> tableed;
+    @FXML
+    private TableColumn<Sensore,Integer> col_valore,col_max;
     @FXML
     private TableColumn<Sensore,String> col_codice, col_tipo, col_datainvio;
     @FXML
     private TableColumn<Sensore,Boolean> col_stato;
+    @FXML
+    private TableColumn<Luogo,String> col_stanza;
+    @FXML
+    private TableColumn<Luogo,String> col_piano;
+
+
 
     private ObservableList<Sensore> oblist;
+    private ObservableList<Luogo> oblistLuogo;
 
     ArrayList<Sensore>listdati=new ArrayList<>();
+    public static ArrayList<Luogo>dataluogo=new ArrayList<>();
     DatoDaoInterface datoDaoInterface = new DatoDao();
+    LuogoDaoInterface luogoDaoInterface = new LuogoDao();
+
+    public static Luogo luogo;
 
     public DashboardController(){}
 
     public void LoadDataSensor() throws SQLException {
 
-            listdati = datoDaoInterface.LoadData();
+        //controllo se il luogo ha una stanza allora è sicuramente un edificio altrimenti è un luogo aperto
+        if(!luogo.getStanza().equals("")){
+            listdati = datoDaoInterface.LoadDataEdificio(luogo);
+            setTableLuogo(dataluogo);
+            dataluogo.clear();
+        }else {
+            listdati = datoDaoInterface.LoadDataLuogoAperto(luogo);
+        }
             setTable(listdati);
+    }
 
-            SensoreController.listsensor = listdati;
-
+        public void BackLuogo(ActionEvent e){
+        new JavaFXController().setLuogo(e,LuogoController.nomezona);
         }
 
     @Override
@@ -53,9 +77,12 @@ public class DashboardController implements Initializable {
         col_tipo.setCellValueFactory(new PropertyValueFactory<>("tipo"));
         col_datainvio.setCellValueFactory(new PropertyValueFactory<>("datainvio"));
         col_stato.setCellValueFactory(new PropertyValueFactory<>("stato"));
-        col_max.setCellValueFactory(new PropertyValueFactory<>("link"));
+        col_max.setCellValueFactory(new PropertyValueFactory<>("linkmax"));
+        col_stanza.setCellValueFactory(new PropertyValueFactory<>("stanza"));
+        col_piano.setCellValueFactory(new PropertyValueFactory<>("piano"));
 
         oblist=FXCollections.observableArrayList(); //dichiaro l'oblist nel metodo initialize della classe
+        oblistLuogo=FXCollections.observableArrayList();
 
         try {
             LoadDataSensor();
@@ -65,11 +92,18 @@ public class DashboardController implements Initializable {
 
     }
 
+    private void setTableLuogo(ArrayList<Luogo>luog){
+        for (int i = 0; i < luog.size(); i++) {
+            oblistLuogo.add(luog.get(i));
+            tableed.setItems(oblistLuogo);
+        }
+    }
+
     private void setTable(ArrayList<Sensore> listdati) {
 
         for (int i = 0; i < listdati.size(); i++) {
             oblist.add(listdati.get(i));
-            tablesearch.setItems(oblist);
+            tabledata.setItems(oblist);
         }
 
             col_valore.setCellFactory(col -> {
@@ -92,7 +126,6 @@ public class DashboardController implements Initializable {
                                     setText(String.valueOf(valore));
 
                                     if (valore.equals(temp.getValore())) {
-                                        System.out.print("VALORE:" + valore + " " + "TEST:" + temp.getMassimale());
                                         if (valore > temp.getMassimale()) {
                                             setStyle("-fx-background-color:orange");
                                         } else {
@@ -110,17 +143,20 @@ public class DashboardController implements Initializable {
             col_stato.setCellFactory(col -> {
                 return new TableCell<Sensore, Boolean>() {
                     protected void updateItem(Boolean stato, boolean empty) {
-                        super.updateItem(stato, empty);
-                        if (stato == null || empty) {
-                            setText(null);
-                            setStyle("");
-                        } else {
-                            if (stato == true) {
-                                setStyle("-fx-background-color:red");
-                            } else {
-                                setStyle("-fx-background-color:green");
-                            }
 
+                        if(stato!=null) {
+                            super.updateItem(stato, empty);
+                            if (stato == null || empty) {
+                                setText(null);
+                                setStyle("");
+                            } else {
+                                if (stato == true) {
+                                    setStyle("-fx-background-color:red");
+                                } else {
+                                    setStyle("-fx-background-color:green");
+                                }
+
+                            }
                         }
                     }
                 };

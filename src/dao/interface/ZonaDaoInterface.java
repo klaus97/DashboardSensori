@@ -9,4 +9,5 @@ public interface ZonaDaoInterface {
 
     ArrayList<Zona> LoadZona(ArrayList<Zona> zonal) throws SQLException;
     ArrayList<Zona> LoadZonaGest(ArrayList<Zona> zonal, ArrayList<Gestore> gest) throws SQLException;
+    Integer NewZona(Zona zonal) throws SQLException;
 }

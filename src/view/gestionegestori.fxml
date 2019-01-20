@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane prefHeight="494.0" prefWidth="863.0" style="-fx-background-color: #00ffff;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.GestioneGestori">
+   <children>
+      <Button layoutX="14.0" layoutY="21.0" mnemonicParsing="false" onAction="#Back" prefHeight="25.0" prefWidth="57.0" text="Back" />
+      <Label layoutX="14.0" layoutY="57.0" prefHeight="31.0" prefWidth="149.0" text="Crea Nuovo Gestore:">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtcodeacc" layoutX="14.0" layoutY="103.0" prefHeight="25.0" prefWidth="277.0" promptText="codiceacc" />
+      <TextField fx:id="txtnome" layoutX="14.0" layoutY="152.0" prefHeight="25.0" prefWidth="277.0" promptText="nome" />
+      <TextField fx:id="txtcognome" layoutX="14.0" layoutY="204.0" prefHeight="25.0" prefWidth="277.0" promptText="cognome" />
+      <TextField fx:id="txtruolo" layoutX="14.0" layoutY="253.0" prefHeight="25.0" prefWidth="277.0" promptText="ruolo" />
+      <Button fx:id="btsave" layoutX="105.0" layoutY="301.0" mnemonicParsing="false" onAction="#NewGestore" prefHeight="25.0" prefWidth="96.0" text="Salva" />
+      <Button layoutX="790.0" layoutY="21.0" mnemonicParsing="false" onAction="#Delete" prefHeight="25.0" prefWidth="57.0" text="Delete" />
+      <TextField fx:id="txtsearch" layoutX="438.0" layoutY="60.0" prefHeight="25.0" prefWidth="338.0" promptText="search for name..." />
+      <Button layoutX="792.0" layoutY="60.0" mnemonicParsing="false" onAction="#Search" prefHeight="25.0" prefWidth="57.0" text="Cerca" />
+      <TableView fx:id="tablegest" layoutX="438.0" layoutY="103.0" prefHeight="377.0" prefWidth="411.0">
+        <columns>
+          <TableColumn fx:id="col_id" prefWidth="32.0" text="ID" />
+          <TableColumn fx:id="col_cod" prefWidth="92.0" text="Codice Accesso" />
+            <TableColumn fx:id="col_nome" prefWidth="108.0" text="Nome" />
+            <TableColumn fx:id="col_cognome" prefWidth="108.0" text="Cognome" />
+            <TableColumn fx:id="col_ruolo" prefWidth="70.0" text="Ruolo" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="home" prefHeight="428.0" prefWidth="520.0" style="-fx-background-color: #ccffff;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AdminPanelController">
+   <children>
+      <TableView fx:id="tablesearch" layoutX="8.0" layoutY="106.0" prefHeight="322.0" prefWidth="335.0">
+         <columns>
+          <TableColumn fx:id="col_codice" minWidth="0.0" prefWidth="157.0" text="Codice" />
+            <TableColumn fx:id="col_stato" minWidth="0.0" prefWidth="64.0" text="stato" />
+            <TableColumn fx:id="col_max" prefWidth="113.0" text="massimale" />
+        </columns>
+      </TableView>
+      <VBox layoutX="356.0" layoutY="106.0" prefHeight="322.0" prefWidth="176.0" style="-fx-background-color: black;">
+         <children>
+            <Button fx:id="btgestsensori" onAction="#GestioneSensori" prefHeight="81.0" prefWidth="176.0" style="-fx-background-color: black;" text="Gestione Sensori" textFill="WHITE" />
+            <Button fx:id="btgestaree" onAction="#GestioneAree" prefHeight="81.0" prefWidth="183.0" style="-fx-background-color: black;" text="Gestione Aree" textFill="WHITE" />
+            <Button fx:id="btgestgestori" onAction="#GestioneGestori" prefHeight="81.0" prefWidth="185.0" style="-fx-background-color: black;" text="Gestione Gestori" textFill="WHITE" />
+            <Button fx:id="btlogout" onAction="#Logout" prefHeight="81.0" prefWidth="176.0" style="-fx-background-color: black;" text="Logout" textFill="WHITE" />
+         </children>
+      </VBox>
+      <Label layoutX="8.0" layoutY="6.0" prefHeight="17.0" prefWidth="176.0" text="AdminPanel" textFill="#2600ff">
+         <font>
+            <Font size="24.0" />
+         </font>
+         <effect>
+            <Reflection />
+         </effect>
+      </Label>
+      <Label layoutX="8.0" layoutY="73.0" text="Sensori Installati:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

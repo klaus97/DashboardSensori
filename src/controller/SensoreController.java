@@ -2,6 +2,8 @@ package controller;
 
 import dao.DatoDao;
 import dao.Interface.DatoDaoInterface;
+import dao.Interface.SensoreDaoInterface;
+import dao.SensoreDao;
 import model.Sensore;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -12,22 +14,24 @@ import java.util.Random;
 
 public class SensoreController {
 
-    static ArrayList<Sensore> listsensor = new ArrayList<>();
+    ArrayList<Sensore> listsensor = new ArrayList<>();
     DatoDaoInterface datoDaoInterface = new DatoDao();
+    SensoreDaoInterface sensoreDaoInterface = new SensoreDao();
     ArrayList<Sensore> listdati = new ArrayList<>();
+    private Integer size=1;
     public  Integer ct=0;
     public  Integer cu=0;
 
     public void GenerateVariable()
     {
         listdati.clear();
-        if(listsensor == null)
-        {
-            try {
-                listsensor=datoDaoInterface.LoadData();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+
+        if(listsensor.size()!=size)
+        try {
+            listsensor=sensoreDaoInterface.LoadSensorData();
+            size=listsensor.size();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
 
         Random random=new Random();
@@ -63,7 +67,6 @@ public class SensoreController {
                     ct=0;
                     listdati.add(new Sensore(listsensor.get(i).getCodices(), stato, 1, ct,valore, listsensor.get(i).getTipo(), dnow));
                 }
-                System.out.println("Prova1:"+ct);
             }else{
 
                 int min = 0;
@@ -79,7 +82,6 @@ public class SensoreController {
 
                     listdati.add(new Sensore(listsensor.get(i).getCodices(), stato, 1, cu,valore, listsensor.get(i).getTipo(), dnow));
                 }
-                System.out.println("Prova2:"+cu);
             }
 
             if(listdati.get(i).getFrequenza()>=3)
@@ -90,6 +92,7 @@ public class SensoreController {
                 JavaFXController.t=0;
             }
         }
+        listsensor.clear();
     }
 
     public void InvioDati(){

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="487.0" prefWidth="851.0" style="-fx-background-color: #00ffff;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.GestioneAree">
+   <children>
+      <Button layoutX="14.0" layoutY="41.0" mnemonicParsing="false" onAction="#Back" prefHeight="25.0" prefWidth="58.0" text="Back" />
+      <Label layoutX="14.0" layoutY="78.0" prefHeight="38.0" prefWidth="96.0" text="Crea Nuova:">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <ChoiceBox fx:id="choicebox" layoutX="110.0" layoutY="85.0" onAction="#ChangeText" prefWidth="150.0" />
+      <TextField fx:id="txtnome" layoutX="14.0" layoutY="133.0" prefHeight="25.0" prefWidth="282.0" promptText="nome" />
+      <TextField fx:id="txtregione" layoutX="14.0" layoutY="180.0" prefHeight="25.0" prefWidth="282.0" promptText="regione" />
+      <TextField fx:id="txtindirizzo" layoutX="14.0" layoutY="180.0" prefHeight="25.0" prefWidth="282.0" promptText="indirizzo" visible="false" />
+      <Label fx:id="lbarea" layoutX="14.0" layoutY="230.0" prefHeight="17.0" prefWidth="131.0" text="Presente nell'area:" visible="false" />
+      <ChoiceBox fx:id="cbAreaZona" layoutX="14.0" layoutY="257.0" prefWidth="150.0" visible="false" />
+      <Button fx:id="btsave" layoutX="90.0" layoutY="324.0" mnemonicParsing="false" onAction="#Salva" prefHeight="25.0" prefWidth="111.0" text="Salva" />
+      <Button fx:id="btdelete" layoutX="786.0" layoutY="41.0" mnemonicParsing="false" onAction="#Delete" text="Delete" />
+      <TextField fx:id="txtsearch" layoutX="369.0" layoutY="85.0" prefHeight="25.0" prefWidth="333.0" promptText="search for name..." />
+      <ChoiceBox fx:id="choiceboxArea" layoutX="710.0" layoutY="85.0" prefHeight="25.0" prefWidth="65.0" />
+      <Button fx:id="btcerca" layoutX="786.0" layoutY="85.0" mnemonicParsing="false" onAction="#Search" prefHeight="25.0" prefWidth="51.0" text="Cerca" />
+      <TableView fx:id="tablesearch" layoutX="369.0" layoutY="130.0" prefHeight="343.0" prefWidth="468.0">
+        <columns>
+          <TableColumn fx:id="col_id" prefWidth="49.0" text="ID" />
+          <TableColumn fx:id="col_nome" prefWidth="240.0" text="Nome" />
+            <TableColumn fx:id="col_regione" prefWidth="177.0" text="Regione" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

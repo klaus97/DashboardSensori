@@ -38,4 +38,6 @@ public class Dato {
     public void setDatainvio(Date datainvio) {
         this.datainvio = datainvio;
     }
+
+
 }

@@ -1,6 +1,8 @@
 package dao;
 
+import controller.DashboardController;
 import dao.Interface.DatoDaoInterface;
+import model.Luogo;
 import model.Sensore;
 import java.sql.*;
 import java.util.ArrayList;
@@ -14,15 +16,55 @@ public class DatoDao implements DatoDaoInterface {
     public DatoDao(){}
 
     @Override
-    public ArrayList<Sensore> LoadData()throws SQLException
-    {
-        //inizializzo la connessione al DB
+    public ArrayList<Sensore> LoadData() throws SQLException {
         ConnectionClass connectionClass = new ConnectionClass();
         Connection connection = connectionClass.getConnection();
 
         //preparo la query da inviare ed eseguire sul DB
         String sql = "SELECT s.cod,d.valore,d.tipo,i.datainvio,s.massimale,s.stato,s.freq FROM invia i join(SELECT max(c.ID_dato) as maxdata,c.ID_sensore from invia c group by c.ID_sensore)inv ON(inv.ID_sensore=i.ID_sensore) AND(inv.maxdata=i.ID_dato) JOIN dato d ON(d.ID=i.ID_dato) join sensore s ON(i.ID_sensore=s.ID) group by s.cod,i.datainvio";
         ps = connection.prepareStatement(sql);
+
+        //ritorno il sisultato della query
+        ResultSet resultSet = ps.executeQuery();
+
+        while(resultSet.next()) {
+            datalist.add(new Sensore(resultSet.getString("s.cod"),resultSet.getBoolean("s.stato"),resultSet.getInt("s.massimale"),resultSet.getInt("s.freq"), resultSet.getInt("d.valore"), resultSet.getString("d.tipo"), resultSet.getDate("i.datainvio")));
+        }
+        return datalist;
+    }
+
+    @Override
+    public ArrayList<Sensore> LoadDataEdificio(Luogo l)throws SQLException
+    {
+        //inizializzo la connessione al DB
+        ConnectionClass connectionClass = new ConnectionClass();
+        Connection connection = connectionClass.getConnection();
+
+        //preparo la query da inviare ed eseguire sul DB
+        String sql = "SELECT s.cod,d.valore,d.tipo,i.datainvio,s.massimale,s.stato,s.freq,st.nome,st.piano FROM invia i join(SELECT max(c.ID_dato) as maxdata,c.ID_sensore from invia c group by c.ID_sensore)inv ON(inv.ID_sensore=i.ID_sensore) AND(inv.maxdata=i.ID_dato) JOIN dato d ON(d.ID=i.ID_dato) join sensore s ON(i.ID_sensore=s.ID) join stanza st on(s.ID_stanza=st.ID) WHERE st.ID_edificio=? group by s.cod,i.datainvio";
+        ps = connection.prepareStatement(sql);
+        ps.setInt(1,l.getId());
+
+        //ritorno il sisultato della query
+        ResultSet resultSet = ps.executeQuery();
+
+        while(resultSet.next()) {
+            datalist.add(new Sensore(resultSet.getString("s.cod"),resultSet.getBoolean("s.stato"),resultSet.getInt("s.massimale"),resultSet.getInt("s.freq"), resultSet.getInt("d.valore"), resultSet.getString("d.tipo"), resultSet.getDate("i.datainvio")));
+            DashboardController.dataluogo.add(new Luogo(null,null,null,resultSet.getString("st.nome"),resultSet.getInt("st.piano")));
+        }
+        return datalist;
+    }
+
+    @Override
+    public ArrayList<Sensore> LoadDataLuogoAperto(Luogo l) throws SQLException {
+        //inizializzo la connessione al DB
+        ConnectionClass connectionClass = new ConnectionClass();
+        Connection connection = connectionClass.getConnection();
+
+        //preparo la query da inviare ed eseguire sul DB
+        String sql = "SELECT s.cod,d.valore,d.tipo,i.datainvio,s.massimale,s.stato,s.freq FROM invia i join(SELECT max(c.ID_dato) as maxdata,c.ID_sensore from invia c group by c.ID_sensore)inv ON(inv.ID_sensore=i.ID_sensore) AND(inv.maxdata=i.ID_dato) JOIN dato d ON(d.ID=i.ID_dato) join sensore s ON(i.ID_sensore=s.ID) WHERE s.ID_luogoaperto=? group by s.cod,i.datainvio";
+        ps = connection.prepareStatement(sql);
+        ps.setInt(1,l.getId());
 
         //ritorno il sisultato della query
         ResultSet resultSet = ps.executeQuery();
@@ -66,9 +108,6 @@ public class DatoDao implements DatoDaoInterface {
     public void SendDataFreq(ArrayList<Sensore> dati) throws SQLException {
         ConnectionClass connectionClass = new ConnectionClass();
         Connection connection = connectionClass.getConnection();
-
-        System.out.print("\n");
-        System.out.println("SONO IN SEND DATA FREQ");
 
         Iterator<Sensore> itr = dati.iterator();
         while(itr.hasNext()){

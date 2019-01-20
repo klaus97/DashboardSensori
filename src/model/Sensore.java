@@ -10,7 +10,7 @@ public class Sensore extends Dato {
     public String codices;
     public Boolean stato;
     public Integer massimale;
-    public Hyperlink link;
+    public Hyperlink linkmax;
     public Integer frequenza;
 
     public Sensore(String cod,Boolean state, Integer max,Integer freq,Integer v,String t,Date d)
@@ -20,10 +20,10 @@ public class Sensore extends Dato {
         this.stato=state;
         this.massimale=max;
         this.frequenza=freq;
-        this.link=new Hyperlink(this.getMassimale().toString());
+        this.linkmax=new Hyperlink(this.getMassimale().toString());
 
         //se viene cliccato apre la finestra per la gestione del massimale
-        link.setOnMouseClicked((MouseEvent mouseEvent) ->
+        linkmax.setOnMouseClicked((MouseEvent mouseEvent) ->
         {
             JavaFXController.setGestionemax(new Sensore(this.getCodices(),null,this.getMassimale(),0,null,null,null));
         });
@@ -61,10 +61,11 @@ public class Sensore extends Dato {
         this.frequenza = frequenza;
     }
 
-    public Hyperlink getLink() {
-        return link;
+    public Hyperlink getLinkmax() {
+        return linkmax;
     }
-    public void setLink(Hyperlink link) {
-        this.link = link;
+
+    public void setLinkmax(Hyperlink linkmax) {
+        this.linkmax = linkmax;
     }
 }

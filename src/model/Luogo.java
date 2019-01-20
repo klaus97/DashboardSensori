@@ -5,14 +5,16 @@ import javafx.scene.control.Button;
 
 public class Luogo {
 
+    public Integer id;
     public String nome;
     public String indirizzo;
     public String stanza;
     public Integer piano;
     private Button link;
 
-    public Luogo(String name,String ind,String room,Integer p)
+    public Luogo(Integer i,String name,String ind,String room,Integer p)
     {
+        this.id=i;
         this.nome=name;
         this.indirizzo=ind;
         this.stanza=room;
@@ -20,7 +22,15 @@ public class Luogo {
         this.link=new Button("view");
 
         //se viene cliccato apre la dashboard
-        link.setOnAction(event -> new JavaFXController().setdashboard(event));
+        link.setOnAction(event -> new JavaFXController().setdashboard(event,new Luogo(this.getId(),this.getNome(),null,this.getStanza(),null)));
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getNome() {

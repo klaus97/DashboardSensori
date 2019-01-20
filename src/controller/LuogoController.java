@@ -22,9 +22,7 @@ public class LuogoController implements Initializable {
     @FXML
     private TableView<Luogo> tableluogo;
     @FXML
-    private TableColumn<Luogo, String> col_nomeluogo, col_indirizzo,col_view,col_stanza;
-    @FXML
-    private TableColumn<Luogo,Integer> col_piano;
+    private TableColumn<Luogo, String> col_nomeluogo, col_indirizzo,col_view;
     @FXML
     private Button btback;
 
@@ -60,8 +58,6 @@ public class LuogoController implements Initializable {
 
         col_nomeluogo.setCellValueFactory(new PropertyValueFactory<>("Nome"));
         col_indirizzo.setCellValueFactory(new PropertyValueFactory<>("Indirizzo"));
-        col_stanza.setCellValueFactory(new PropertyValueFactory<>("Stanza"));
-        col_piano.setCellValueFactory(new PropertyValueFactory<>("Piano"));
         col_view.setCellValueFactory(new PropertyValueFactory<>("link"));
 
         oblist = FXCollections.observableArrayList(); //dichiaro l'oblist nel metodo initialize della classe

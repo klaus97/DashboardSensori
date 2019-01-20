@@ -6,9 +6,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="591.0" prefWidth="726.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DashboardController">
+<AnchorPane prefHeight="591.0" prefWidth="857.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DashboardController">
 <children>
-    <TableView fx:id="tablesearch" layoutX="7.0" layoutY="94.0" prefHeight="497.0" prefWidth="710.0">
+    <TableView fx:id="tabledata" layoutX="7.0" layoutY="94.0" prefHeight="497.0" prefWidth="710.0">
         <columns>
             <TableColumn fx:id="col_codice" prefWidth="132.0" text="codice" />
             <TableColumn fx:id="col_stato" minWidth="0.0" prefWidth="42.0" text="stato" />
@@ -18,5 +18,12 @@
             <TableColumn fx:id="col_max" prefWidth="84.0" text="massimale" />
         </columns>
     </TableView>
+      <Button fx:id="btback" layoutX="780.0" layoutY="51.0" mnemonicParsing="false" onAction="#BackLuogo" prefHeight="25.0" prefWidth="71.0" text="Back" />
+      <TableView fx:id="tableed" layoutX="717.0" layoutY="94.0" prefHeight="497.0" prefWidth="134.0">
+        <columns>
+          <TableColumn fx:id="col_stanza" prefWidth="94.0" text="stanza" />
+          <TableColumn fx:id="col_piano" minWidth="0.0" prefWidth="39.0" text="piano" />
+        </columns>
+      </TableView>
 </children>
 </AnchorPane>

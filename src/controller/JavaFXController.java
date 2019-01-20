@@ -12,6 +12,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import model.Gestore;
+import model.Luogo;
 import model.Sensore;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -36,8 +37,7 @@ public class JavaFXController extends Application {
         ps=primaryStage;
 
             //timeline per l'invio frequente
-            timeline2 = new Timeline(new KeyFrame(Duration.seconds(10), event -> {
-                System.out.print("SONO ENTRATO");
+            timeline2 = new Timeline(new KeyFrame(Duration.seconds(30), event -> {
                 sensoreController.GenerateVariable();
                 sensoreController.InvioDatiFreq();
                 JavaFXController.t=0;
@@ -46,19 +46,18 @@ public class JavaFXController extends Application {
            // timeline2.play();
 
             //timeline per aggiornamento dei dati e invio ogni minuto
-            timeline = new Timeline(new KeyFrame(Duration.seconds(20), event -> {
+            timeline = new Timeline(new KeyFrame(Duration.seconds(60), event -> {
                 sensoreController.GenerateVariable();
                 sensoreController.InvioDati();
                 refresh();
             }));
             timeline.setCycleCount(Animation.INDEFINITE);
             timeline.play();
-
-
     }
 
-    public void setdashboard(ActionEvent event) {
+    public void setdashboard(ActionEvent event, Luogo l) {
         Parent root;
+        DashboardController.luogo=l;
 
         try {
             //setto la nuova scena della home page e nascondo la precedente
@@ -135,6 +134,25 @@ public class JavaFXController extends Application {
         }
     }
 
+    public void setAdminPanel(ActionEvent event){
+        Parent root;
+
+        try {
+            //setto la nuova scena della home page e nascondo la precedente
+            root = FXMLLoader.load(DashboardController.class.getResource("../view/AdminPanel.fxml"));
+            Stage stage = new Stage();
+            stage.setTitle("AdminPanel");
+            Scene home = new Scene(root);
+            stage.setScene(home);
+            stage.show();
+            ps=stage;
+            ((Node) (event.getSource())).getScene().getWindow().hide();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void setGestionemax(Sensore s){
 
         new GestioneMax().SetInfo(s);
@@ -155,10 +173,68 @@ public class JavaFXController extends Application {
         }
     }
 
+    public void setGestioneGestori(ActionEvent event){
+        Parent root;
+
+        try {
+            //setto la nuova scena della home page e nascondo la precedente
+            root = FXMLLoader.load(DashboardController.class.getResource("../view/gestionegestori.fxml"));
+            Stage stage = new Stage();
+            stage.setTitle("Gestione Gestori");
+            Scene home = new Scene(root);
+            stage.setScene(home);
+            stage.show();
+            ps=stage;
+            ((Node) (event.getSource())).getScene().getWindow().hide();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void setGestioneAree(ActionEvent event){
+        Parent root;
+
+        try {
+            //setto la nuova scena della home page e nascondo la precedente
+            root = FXMLLoader.load(DashboardController.class.getResource("../view/gestionearee.fxml"));
+            Stage stage = new Stage();
+            stage.setTitle("Gestione Aree");
+            Scene home = new Scene(root);
+            stage.setScene(home);
+            stage.show();
+            ps=stage;
+            ((Node) (event.getSource())).getScene().getWindow().hide();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void setGestioneSensori(ActionEvent event){
+        Parent root;
+
+        try {
+            //setto la nuova scena della home page e nascondo la precedente
+            root = FXMLLoader.load(DashboardController.class.getResource("../view/gestionesensori.fxml"));
+            Stage stage = new Stage();
+            stage.setTitle("Gestione Sensori");
+            Scene home = new Scene(root);
+            stage.setScene(home);
+            stage.show();
+            ps=stage;
+            ((Node) (event.getSource())).getScene().getWindow().hide();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void refresh(){
 
         //controllo se la finestra di login è ancora aperta, cosi evito che il metodo refresh apra la finestra dei dati anche se il gestore non ha effettuato il login
         if(ps.getScene().getWindow().isShowing()){
+            System.out.println("Hello");
         }else{
         Parent root;
 
@@ -187,13 +263,18 @@ public class JavaFXController extends Application {
         while(itr.hasNext()){
             Gestore g=itr.next();
 
-            if(g.getRuolo().equals("area")){
-                setArea(event);
+            if(g.getRuolo().equals("admin")){
+                setAdminPanel(event);
             }
-            else if(g.getRuolo().equals("zona")){
-                setZona(event);
-            }else{
-                setLuogo(event,"");
+
+            else {
+                if (g.getRuolo().equals("area")) {
+                    setArea(event);
+                } else if (g.getRuolo().equals("zona")) {
+                    setZona(event);
+                } else {
+                    setLuogo(event, "");
+                }
             }
         }
     }
